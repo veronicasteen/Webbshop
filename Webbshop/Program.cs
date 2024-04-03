@@ -14,7 +14,6 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = "Google";
 })
 .AddCookie(options =>
-//hejhej
 {
     // When a user logs in to Google for the first time, create a local account for that user in our database.
     options.Events.OnValidatePrincipal += async context =>
