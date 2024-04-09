@@ -154,10 +154,10 @@ namespace Webbshop.Data
 
                 database.Products.Add(new Product
                 {
-                    Name = "Reusable Grocery Bags Set",
-                    Description = "Set of reusable grocery bags made from eco-friendly materials to reduce plastic waste.",
+                    Name = "Reusable Grocery Bags",
+                    Description = "Reusable grocery bag made from eco-friendly materials to reduce plastic waste.",
                     Price = 14.99,
-                    ImagePath = "grocery_bags_set.jpg"
+                    ImagePath = "grocery_bags.jpg"
                 });
 
                 database.Products.Add(new Product
