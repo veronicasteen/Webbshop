@@ -19,21 +19,49 @@
     <button id="submit" type="submit">Search</button>
 </form>
 
-<ul>
+@{
 
-    @foreach (var product in Model.Products)
+    var searchItem = Request.Query["searchItem"].ToString().Trim().ToLower(); 
+    var category = Request.Query["category"].ToString();
+
+    var filteredProducts = Model.Products.ToList();
+
+    if (!string.IsNullOrEmpty(searchItem))
     {
-        <img src="images/@product.ImagePath"/>
-        <h2>@product.Name</h2>
-        <li>
-            @product.Price
-        <a asp-page="./Details" asp-route-id="@product.Id">Show details</a>
-        </li>
+        filteredProducts = filteredProducts.Where(p => p.Name.ToLower().Contains(searchItem)).ToList();
     }
-</ul>
 
-@* Ha detta som första sida alltså "sök-sidan"
-Ha en annan sida som varukorg
-Ha en annan sida som detaljer
-Ha en annan sida som orderbekräftelse *@
+    if (!string.IsNullOrEmpty(category))
+    {
+        filteredProducts = filteredProducts.Where(p => p.Category.ToLower() == category.ToLower()).ToList();
+    }
+
+  
+}
+
+@if (filteredProducts.Any())
+{
+    <ul>
+        @foreach (var product in filteredProducts)
+        {
+            <img src="images/@product.ImagePath" />
+            <h2>@product.Name</h2>
+            <li>
+                @product.Price
+                <a asp-page="./Details" asp-route-id="@product.Id">Show details</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No products found.</p>
+}
+
+}
+
+
+
+
+
 

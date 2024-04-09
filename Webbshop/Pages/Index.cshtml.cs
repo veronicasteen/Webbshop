@@ -19,7 +19,7 @@ namespace Webbshop.Pages
 
         public void OnGet()
         {
-            Products = database.Products.ToList();
+            Products = database.Products.OrderBy(p => p.Price).ToList();
         }
     }
 }
