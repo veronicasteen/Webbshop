@@ -7,13 +7,26 @@
 
 <h1>Welcome, @accessControl.LoggedInAccountName!</h1>
 
+<nav>
+    <ul>
+        <li><a asp-page="./Index">Products</a></li>
+        <li><a asp-page="./Cart">Cart</a></li>
+    </ul>
+</nav>
+
 <form method = "get">
     <label for="searchInput">Search for an image:</label>
     <input type="text" name="searchItem" placeholder="What are you looking for?">
 
     <label for="categorySelect">Pick a category:</label>
     <select id="categorySelect">
-        <option>Any category</option>   
+        <option>Any category</option> 
+        <option>Electronics</option> 
+        <option>Outdoors</option> 
+        <option>Eco-friendly</option> 
+        <option>Indoors</option>
+        <option>Health</option>
+        <option>Food and beverage</option>
     </select>
 
     <button id="submit" type="submit">Search</button>
@@ -44,7 +57,7 @@
     <ul>
         @foreach (var product in filteredProducts)
         {
-            <img src="Pictures/@product.ImagePath" />
+            <img src="Pictures/@product.ImagePath"width="200px" height="200px"/>
             <h2>@product.Name</h2>
             <li>
                 @product.Price
