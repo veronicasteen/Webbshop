@@ -37,33 +37,18 @@
     var category = Request.Query["categorySelect"].ToString();
 
     var filteredProducts = Model.Products.ToList();
-    // if (!string.IsNullOrEmpty(searchItem))
-    // {
-    //     // Filtrera endast om det finns ett sökord
-    //     filteredProducts = filteredProducts.Where(p => p.Name.ToLower().Contains(searchItem)).ToList();
-    // }
+    if (!string.IsNullOrEmpty(searchItem))
+    {
+        // Filtrera produkter baserat på söktermen
+        filteredProducts = filteredProducts.Where(p => p.Name.ToLower().Contains(searchItem)).ToList();
+    }
 
-    // else if (!string.IsNullOrEmpty(category))
-    // {
-    //     // Kontrollera om det finns en kategori men inget sökord
-    //     if (string.IsNullOrEmpty(searchItem))
-    //     {
-    //         // Filtrera endast efter kategorin om det inte finns något sökord
-    //         filteredProducts = filteredProducts.Where(p => p.Category == category).ToList();
-    //     }
-    //     else
-    //     {
-    //         // Om både sökord och kategori finns, filtrera efter båda
-    //         filteredProducts = filteredProducts.Where(p => p.Name.ToLower().Contains(searchItem) && p.Category == category).ToList();
-    //     }
-    // }
-
-}
-
-@if (!string.IsNullOrEmpty(searchItem) || !string.IsNullOrEmpty(category))
-{
-    // Om både sökord och/eller kategori har angetts, filtrera produkterna
-    filteredProducts = filteredProducts.Where(p => p.Name.ToLower().Contains(searchItem) || p.Category == category).ToList();
+    // Kontrollera om det finns en vald kategori
+    if (!string.IsNullOrEmpty(category) && category != "Any category")
+    {
+        // Filtrera produkter baserat på kategorin
+        filteredProducts = filteredProducts.Where(p => p.Category.ToLower() == category.ToLower()).ToList();
+    }
 
     @if (filteredProducts.Any())
     {
