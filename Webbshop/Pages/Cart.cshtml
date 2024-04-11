@@ -14,7 +14,7 @@
 
 @foreach (var item in Model.CartItems)
 {
-    <img src="Pictures/@Model.Product.ImagePath" width="200px" height="200px" />
+    <img src="Pictures/@item.Product.ImagePath" width="200px" height="200px" />
 
     <ul>
         <li>@item.Product.Name</li>
