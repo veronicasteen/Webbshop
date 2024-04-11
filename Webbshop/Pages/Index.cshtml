@@ -8,28 +8,30 @@
 <h1>Welcome, @accessControl.LoggedInAccountName!</h1>
 
 <nav>
-    <ul>
+    <ul class ="list-container">
         <li><a asp-page="./Index">Products</a></li>
         <li><a asp-page="./Cart">Cart</a></li>
     </ul>
 </nav>
 
 <form method="get">
-    <label for="searchInput">Search for an image:</label>
-    <input type="text" name="searchItem" placeholder="What are you looking for?">
+    <div class="search-container">
+        <label for="searchInput">Search for an image:</label>
+        <input type="text" name="searchItem" placeholder="What are you looking for?">
 
-    <label for="categorySelect">Pick a category:</label>
-    <select id="categorySelect" name="categorySelect">
-        <option>Any category</option>
-        <option>Electronics</option>
-        <option>Outdoors</option>
-        <option>Eco-friendly</option>
-        <option>Indoors</option>
-        <option>Health</option>
-        <option>Food and beverage</option>
-    </select>
+        <label for="categorySelect">Pick a category:</label>
+        <select id="categorySelect" name="categorySelect">
+            <option>Any category</option>
+            <option>Electronics</option>
+            <option>Outdoors</option>
+            <option>Eco-friendly</option>
+            <option>Indoors</option>
+            <option>Health</option>
+            <option>Food and beverage</option>
+        </select>
 
-    <button id="submit" type="submit">Search</button>
+        <button id="submit" type="submit">Search</button>
+    </div>
 </form>
 
 @{
@@ -52,17 +54,17 @@
 
     @if (filteredProducts.Any())
     {
-        <ul>
+        <div class="product-grid">
             @foreach (var product in filteredProducts)
             {
-                <img src="Pictures/@product.ImagePath" width="200px" height="200px" />
-                <h2>@product.Name</h2>
-                <li>
-                    @product.Price
+                <div class="product-item">
+                    <img src="Pictures/@product.ImagePath" width="200px" height="200px" />
+                    <h2>@product.Name</h2>
+                    <p>@product.Price</p>
                     <a asp-page="./Details" asp-route-id="@product.Id">Show details</a>
-                </li>
+                </div>
             }
-        </ul>
+        </div>
     }
     else
     {
