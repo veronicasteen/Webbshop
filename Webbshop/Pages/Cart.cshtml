@@ -2,3 +2,28 @@
 @model Webbshop.Pages.CartModel
 @{
 }
+
+<nav>
+    <ul>
+        <li><a asp-page="./Index">Products</a></li>
+        <li><a asp-page="./Cart">Cart</a></li>
+    </ul>
+</nav>
+
+<h1>Cart:</h1>
+
+@foreach (var item in Model.CartItems)
+{
+    <img src="Pictures/@item.Product.ImagePath" width="200px" height="200px" />
+
+    <ul>
+        <li>@item.Product.Name</li>
+        <li>@item.Product.Price</li>
+        <li>@item.Quantity</li>
+        <li>@(item.Product.Price * item.Quantity)</li>
+    </ul>
+}
+<P>Total: @Model.TotalAmount</P>
+<form method="post">
+    <button type="submit">Clear cart</button>
+</form>
