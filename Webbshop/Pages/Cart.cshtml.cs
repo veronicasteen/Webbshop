@@ -22,17 +22,42 @@ namespace Webbshop.Pages
         public double TotalAmount { get; set; }
         public Product Product { get; set; }
 
+        private List<AccountProduct> GetCartItems()
+        {
+            var loggedInUserId = accessControl.LoggedInAccountID;
+            return database.AccountProducts
+                .Include(ap => ap.Product)
+                .Where(ap => ap.AccountID == loggedInUserId)
+                .ToList();
+        }
 
         public void OnGet()
         {
-            var loggedInUserId = accessControl.LoggedInAccountID;
-
-            CartItems = database.AccountProducts
-            .Include(ap => ap.Product) // Inkludera produkter
-            .Where(ap => ap.AccountID == loggedInUserId)
-            .ToList();
-
+            CartItems = GetCartItems();
             TotalAmount = CartItems.Sum(ap => ap.Product.Price * ap.Quantity);
         }
+
+        public void OnPostClearCart()
+        {
+            var cartItemsToRemove = GetCartItems();
+            RemoveCartItems(cartItemsToRemove);
+        }
+
+        private IActionResult RemoveCartItems(List<AccountProduct> cartItems)
+        {
+            database.AccountProducts.RemoveRange(cartItems);
+            database.SaveChanges();
+
+            return Page();
+        }
+
+        //public IActionResult OnPost(string action)
+        //{
+        //    var cartItemsToRemove = GetCartItems();
+        //    RemoveCartItems(cartItemsToRemove);
+
+        //    return RedirectToPage("/Confirmation", new { totalAmount = TotalAmount });
+        //}
+
     }
 }

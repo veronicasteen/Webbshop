@@ -12,18 +12,25 @@
 
 <h1>Cart:</h1>
 
+@if (Model.CartItems != null){
+
 @foreach (var item in Model.CartItems)
 {
     <img src="Pictures/@item.Product.ImagePath" width="200px" height="200px" />
 
     <ul>
         <li>@item.Product.Name</li>
-        <li>@item.Product.Price</li>
-        <li>@item.Quantity</li>
-        <li>@(item.Product.Price * item.Quantity)</li>
+        <li>@item.Product.Price$</li>
+        <li>Quantity: @item.Quantity</li>
+        <li>Total amount: @(item.Product.Price * item.Quantity)$</li>
     </ul>
 }
-<P>Total: @Model.TotalAmount</P>
+    }
+<P>Total: @Model.TotalAmount$</P>
 <form method="post">
     <button type="submit">Clear cart</button>
+</form>
+
+<form method="post">
+    <button type="submit" name="action" value="Order">Order</button>
 </form>
