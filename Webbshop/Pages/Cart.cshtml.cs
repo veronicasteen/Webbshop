@@ -36,7 +36,7 @@ namespace Webbshop.Pages
         public void OnGet()
         {
             CartItems = GetCartItems();
-            TotalAmount = CartItems.Sum(ap => ap.Product.Price * ap.Quantity);
+            TotalAmount = Math.Round(CartItems.Sum(ap => ap.Product.Price * ap.Quantity), 2);
         }
 
         public void OnPostDelete()
@@ -57,8 +57,7 @@ namespace Webbshop.Pages
         {
             var cartItemsToRemove = GetCartItems();
             CartItems = cartItemsToRemove; // Tilldela CartItems med värdet från GetCartItems()
-            double totalAmount = CartItems.Sum(ap => ap.Product.Price * ap.Quantity);
-
+            double totalAmount = Math.Round(CartItems.Sum(ap => ap.Product.Price * ap.Quantity), 2);
             RemoveCartItems(cartItemsToRemove);
 
             // Skapa en redirect URL med totalpriset som querysträng
