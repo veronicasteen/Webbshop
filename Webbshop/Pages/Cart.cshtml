@@ -27,10 +27,10 @@
 }
     }
 <P>Total: @Model.TotalAmount$</P>
-<form method="post">
+<form asp-page-handler="delete" method="post">
     <button type="submit">Clear cart</button>
 </form>
 
-<form method="post">
-    <button type="submit" name="action" value="Order">Order</button>
+<form asp-page-handler="order" method="post">
+    <button type="submit">Order</button>
 </form>

@@ -22,9 +22,11 @@ namespace Webbshop.Pages
         public double TotalAmount { get; set; }
         public Product Product { get; set; }
 
+
         private List<AccountProduct> GetCartItems()
         {
             var loggedInUserId = accessControl.LoggedInAccountID;
+
             return database.AccountProducts
                 .Include(ap => ap.Product)
                 .Where(ap => ap.AccountID == loggedInUserId)
@@ -37,7 +39,7 @@ namespace Webbshop.Pages
             TotalAmount = CartItems.Sum(ap => ap.Product.Price * ap.Quantity);
         }
 
-        public void OnPostClearCart()
+        public void OnPostDelete()
         {
             var cartItemsToRemove = GetCartItems();
             RemoveCartItems(cartItemsToRemove);
@@ -51,13 +53,18 @@ namespace Webbshop.Pages
             return Page();
         }
 
-        //public IActionResult OnPost(string action)
-        //{
-        //    var cartItemsToRemove = GetCartItems();
-        //    RemoveCartItems(cartItemsToRemove);
+        public IActionResult OnPostOrder()
+        {
+            var cartItemsToRemove = GetCartItems();
+            CartItems = cartItemsToRemove; // Tilldela CartItems med värdet från GetCartItems()
+            double totalAmount = CartItems.Sum(ap => ap.Product.Price * ap.Quantity);
 
-        //    return RedirectToPage("/Confirmation", new { totalAmount = TotalAmount });
-        //}
+            RemoveCartItems(cartItemsToRemove);
+
+            // Skapa en redirect URL med totalpriset som querysträng
+            return RedirectToPage("/Confirmation", new { totalAmount = totalAmount });
+        }
+
 
     }
 }
