@@ -18,7 +18,7 @@
 		<div class="search-container">
 			<label for="searchInput">Search for an product:</label>
 			<input id="searchInput" type="text" name="searchItem" placeholder="What are you looking for?">
-
+			<input type="hidden" name="pageNumber" value ="1" />
 			<label for="categorySelect">Pick a category:</label>
 			<select id="categorySelect" name="categorySelect">
 				<option>Any category</option>
@@ -36,27 +36,12 @@
 </div>
 
 @{
-	var searchItem = Request.Query["searchItem"].ToString().Trim().ToLower();
-	var category = Request.Query["categorySelect"].ToString();
+	
 
-	var filteredProducts = Model.Products.ToList();
-	if (!string.IsNullOrEmpty(searchItem))
-	{
-		// Filtrera produkter baserat på söktermen
-		filteredProducts = filteredProducts.Where(p => p.Name.ToLower().Contains(searchItem)).ToList();
-	}
-
-	// Kontrollera om det finns en vald kategori
-	if (!string.IsNullOrEmpty(category) && category != "Any category")
-	{
-		// Filtrera produkter baserat på kategorin
-		filteredProducts = filteredProducts.Where(p => p.Category.ToLower() == category.ToLower()).ToList();
-	}
-
-	@if (filteredProducts.Any())
+	@if (Model.Products.Any())
 	{
 		<div class="product-grid">
-			@foreach (var product in filteredProducts)
+			@foreach (var product in Model.Products)
 			{
 				<div class="product-container">
 					<img src="Pictures/@product.ImagePath" width="200px" height="200px" />
