@@ -2,77 +2,77 @@
 @model IndexModel
 @inject Webbshop.Data.AccessControl accessControl
 @{
-    ViewData["Title"] = "Home page";
-}
+	ViewData["Title"] = "Home page";
+} 
 <div class="header-container">
-    <h1>Welcome, @accessControl.LoggedInAccountName!</h1>
+	<h1>Welcome, @accessControl.LoggedInAccountName!</h1>
 
-<nav>
-    <ul class ="list-container">
-        <li><a asp-page="./Index">Products</a></li>
-        <li><a asp-page="./Cart">Cart</a></li>
-    </ul>
-</nav>
+	<nav>
+		<ul class="list-container">
+			<li><a asp-page="./Index">Products</a></li>
+			<li><a asp-page="./Cart">Cart</a></li>
+		</ul>
+	</nav>
 
-<form method="get">
-    <div class="search-container">
-        <label for="searchInput">Search for an image:</label>
-        <input type="text" name="searchItem" placeholder="What are you looking for?">
+	<form method="get">
+		<div class="search-container">
+			<label for="searchInput">Search for an product:</label>
+			<input id="searchInput" type="text" name="searchItem" placeholder="What are you looking for?">
 
-        <label for="categorySelect">Pick a category:</label>
-        <select id="categorySelect" name="categorySelect">
-            <option>Any category</option>
-            <option>Electronics</option>
-            <option>Outdoors</option>
-            <option>Eco-friendly</option>
-            <option>Indoors</option>
-            <option>Health</option>
-            <option>Food and beverage</option>
-        </select>
+			<label for="categorySelect">Pick a category:</label>
+			<select id="categorySelect" name="categorySelect">
+				<option>Any category</option>
+				<option>Electronics</option>
+				<option>Outdoors</option>
+				<option>Eco-friendly</option>
+				<option>Indoors</option>
+				<option>Health</option>
+				<option>Food and beverage</option>
+			</select>
 
-        <button id="submit" type="submit">Search</button>
-    </div>
-</form>
+			<button id="submit" type="submit">Search</button>
+		</div>
+	</form>
 </div>
 
 @{
-    var searchItem = Request.Query["searchItem"].ToString().Trim().ToLower();
-    var category = Request.Query["categorySelect"].ToString();
+	var searchItem = Request.Query["searchItem"].ToString().Trim().ToLower();
+	var category = Request.Query["categorySelect"].ToString();
 
-    var filteredProducts = Model.Products.ToList();
-    if (!string.IsNullOrEmpty(searchItem))
-    {
-        // Filtrera produkter baserat på söktermen
-        filteredProducts = filteredProducts.Where(p => p.Name.ToLower().Contains(searchItem)).ToList();
-    }
+	var filteredProducts = Model.Products.ToList();
+	if (!string.IsNullOrEmpty(searchItem))
+	{
+		// Filtrera produkter baserat på söktermen
+		filteredProducts = filteredProducts.Where(p => p.Name.ToLower().Contains(searchItem)).ToList();
+	}
 
-    // Kontrollera om det finns en vald kategori
-    if (!string.IsNullOrEmpty(category) && category != "Any category")
-    {
-        // Filtrera produkter baserat på kategorin
-        filteredProducts = filteredProducts.Where(p => p.Category.ToLower() == category.ToLower()).ToList();
-    }
+	// Kontrollera om det finns en vald kategori
+	if (!string.IsNullOrEmpty(category) && category != "Any category")
+	{
+		// Filtrera produkter baserat på kategorin
+		filteredProducts = filteredProducts.Where(p => p.Category.ToLower() == category.ToLower()).ToList();
+	}
 
-    @if (filteredProducts.Any())
-    {
-        <div class="product-grid">
-            @foreach (var product in filteredProducts)
-            {
-                <div class="product-container">
-                    <img src="Pictures/@product.ImagePath" width="200px" height="200px" />
-                    <div class="image-details">
-                        <h2>@product.Name</h2>
-                        <p>@product.Price$</p>
-                        <a asp-page="./Details" asp-route-id="@product.Id">Show details</a>
-                    </div>
-                </div>
-            }
-        </div>
-    }
-    else
-    {
-        <p>No products found.</p>
-    }
+	@if (filteredProducts.Any())
+	{
+		<div class="product-grid">
+			@foreach (var product in filteredProducts)
+			{
+				<div class="product-container">
+					<img src="Pictures/@product.ImagePath" width="200px" height="200px" />
+					<div class="image-details">
+						<h2>@product.Name</h2>
+						<p>@product.Price$</p>
+						<a asp-page="./Details" asp-route-id="@product.Id">Show details</a>
+					</div>
+				</div>
+			}
+		</div>
+	}
+	else
+	{
+		<p>No products found.</p>
+	}
 }
 
 
