@@ -3,6 +3,11 @@ body{
     background-color:#fefefe;
 }
 
+.header-container {
+    background-image: url(Header-background.jpg);
+    Background-size: cover;
+    background-attachment: fixed;
+}
 
 h1 {
     text-align: center;
