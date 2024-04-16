@@ -6,64 +6,66 @@ using Webbshop.Models;
 
 namespace Webbshop.Pages
 {
-    public class CartModel : PageModel
-    {
+	public class CartModel : PageModel
+	{
 
-        private readonly AppDbContext database;
-        private readonly AccessControl accessControl;
-
-
-        public CartModel(AppDbContext database, AccessControl accessControl)
-        {
-            this.database = database;
-            this.accessControl = accessControl;
-        }
-        public List<AccountProduct> CartItems { get; set; }
-        public double TotalAmount { get; set; }
-        public Product Product { get; set; }
+		private readonly AppDbContext database;
+		private readonly AccessControl accessControl;
 
 
-        private List<AccountProduct> GetCartItems()
-        {
-            var loggedInUserId = accessControl.LoggedInAccountID;
-
-            return database.AccountProducts
-                .Include(ap => ap.Product)
-                .Where(ap => ap.AccountID == loggedInUserId)
-                .ToList();
-        }
-
-        public void OnGet()
-        {
-            CartItems = GetCartItems();
-            TotalAmount = Math.Round(CartItems.Sum(ap => ap.Product.Price * ap.Quantity), 2);
-        }
-
-        public void OnPostDelete()
-        {
-            var cartItemsToRemove = GetCartItems();
-            RemoveCartItems(cartItemsToRemove);
-        }
-
-        private IActionResult RemoveCartItems(List<AccountProduct> cartItems)
-        {
-            database.AccountProducts.RemoveRange(cartItems);
-            database.SaveChanges();
-
-            return Page();
-        }
-
-        public IActionResult OnPostOrder()
-        {
-            var cartItemsToRemove = GetCartItems();
-            CartItems = cartItemsToRemove; // Tilldela CartItems med värdet från GetCartItems()
-            double totalAmount = Math.Round(CartItems.Sum(ap => ap.Product.Price * ap.Quantity), 2);
-            RemoveCartItems(cartItemsToRemove);
-
-            // Skapa en redirect URL med totalpriset som querysträng
-            return RedirectToPage("/Confirmation", new { totalAmount = totalAmount });
-        }
+		public CartModel(AppDbContext database, AccessControl accessControl)
+		{
+			this.database = database;
+			this.accessControl = accessControl;
+		}
+		public List<AccountProduct> CartItems { get; set; }
+		public double TotalAmount { get; set; }
+		public Product Product { get; set; }
 
 
-    }
+		public double CalculateTotalAmount(List<AccountProduct> cartItems)
+		{
+			return Math.Round(cartItems.Sum(ap => ap.Product.Price * ap.Quantity), 2);
+		}
+
+		public List<AccountProduct> GetCartItems()
+		{
+			var loggedInUserId = accessControl.LoggedInAccountID;
+
+			return database.AccountProducts
+				.Include(ap => ap.Product)
+				.Where(ap => ap.AccountID == loggedInUserId)
+				.ToList();
+		}
+
+		public void OnGet()
+		{
+			CartItems = GetCartItems();
+			TotalAmount = CalculateTotalAmount(CartItems);
+		}
+
+		public void OnPostDelete()
+		{
+			var cartItemsToRemove = GetCartItems();
+			RemoveCartItems(cartItemsToRemove);
+		}
+
+		private IActionResult RemoveCartItems(List<AccountProduct> cartItems)
+		{
+			database.AccountProducts.RemoveRange(cartItems);
+			database.SaveChanges();
+
+			return Page();
+		}
+
+		public IActionResult OnPostOrder()
+		{
+			var cartItemsToRemove = GetCartItems();
+			TotalAmount = CalculateTotalAmount(CartItems);
+			RemoveCartItems(cartItemsToRemove);
+
+			return RedirectToPage("/Confirmation", new { totalAmount = TotalAmount });
+		}
+
+	}
 }

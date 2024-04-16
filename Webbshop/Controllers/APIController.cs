@@ -18,31 +18,54 @@ namespace Webbshop.Controllers
         }
 
 		[HttpGet]
-        public IActionResult GetProducts(int pageNumber, string searchItem, string category)
+		[Route("/products")]
+		public IActionResult GetProducts(int pageNumber, string searchItem, string category)
 		{
 			var pageSize = 10;
 
-			var products = database.Products.OrderBy(p => p.Price).ToList();
+			// Hämta produkter från databasen
+			var productsQuery = database.Products.AsQueryable();
 
+			// Filtrera produkter baserat på sökterm
 			if (!string.IsNullOrEmpty(searchItem))
 			{
-				products = products.Where(p => p.Name.ToLower().Contains(searchItem.ToLower())).ToList();
+				productsQuery = productsQuery.Where(p => p.Name.ToLower().Contains(searchItem.ToLower()));
 			}
 
+			// Filtrera produkter baserat på kategori
 			if (!string.IsNullOrEmpty(category) && category != "Any category")
 			{
-				products = products.Where(p => p.Category.ToLower() == category.ToLower()).ToList();
+				productsQuery = productsQuery.Where(p => p.Category.ToLower() == category.ToLower());
 			}
 
-			products = products.Skip((pageNumber - 1) * pageSize)
-							   .Take(pageSize)
-							   .ToList();
+			// Sortera produkter baserat på pris, kanske kan ta bort detta
+			productsQuery = productsQuery.OrderBy(p => p.Price);
 
+			// Paginering
+			var products = productsQuery.Skip((pageNumber - 1) * pageSize)
+										.Take(pageSize)
+										.ToList();
 
+			// Konvertera produktdata till ett format som inkluderar bild-URL:er
+			var formattedProducts = products.Select(p => new
+			{
+				p.Name,
+				image = GetImage(p.ImagePath), // Funktion för att generera bild-URL
+				p.Price,
+				p.Category,
+				p.Description
+			});
 
-			return Ok(products);
-
+			return Ok(formattedProducts);
 		}
 
+		private string GetImage(string imagePath)
+		{
+			string webURL = "https://localhost:5000/Pictures/";
+			string imageURL = $"{webURL}{imagePath}";
+			return imageURL;
+		}
 	}
+
 }
+
