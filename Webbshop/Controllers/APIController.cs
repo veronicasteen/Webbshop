@@ -22,21 +22,17 @@ namespace Webbshop.Controllers
         {
 			var pageSize = 10;
 
-			// Hämta produkter från databasen
 			var productsQuery = database.Products.AsQueryable();
 
-			// Filtrera produkter baserat på sökterm
 			if (!string.IsNullOrEmpty(searchItem))
 			{
 				productsQuery = productsQuery.Where(p => p.Name.ToLower().Contains(searchItem.ToLower()));
 			}
 
-			// Filtrera produkter baserat på kategori
 			if (!string.IsNullOrEmpty(category) && category != "Any category")
 			{
 				productsQuery = productsQuery.Where(p => p.Category.ToLower() == category.ToLower());
 			}
-
 
 			var products = productsQuery.Skip((pageNumber - 1) * pageSize)
 										.Take(pageSize)
@@ -44,8 +40,6 @@ namespace Webbshop.Controllers
 
 			var imageURL = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
 			
-
-
 			var formattedProducts = products.Select(p => new
 			{
 				p.Name,
@@ -58,13 +52,6 @@ namespace Webbshop.Controllers
 			return Ok(formattedProducts);
 		}
 
-		//[HttpGet("/Pictures/{imagePath}")]
-		//public string GenerateImage(string imagePath)
-		//{
-		//	string webURL = "https://localhost:5000/Pictures/";
-		//	string imageURL = $"{webURL}{imagePath}";
-		//	return imageURL;
-		//}
 	}
 
 }
