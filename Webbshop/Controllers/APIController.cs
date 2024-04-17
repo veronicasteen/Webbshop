@@ -41,12 +41,10 @@ namespace Webbshop.Controllers
 			// Sortera produkter baserat på pris, kanske kan ta bort detta
 			productsQuery = productsQuery.OrderBy(p => p.Price);
 
-			// Paginering
 			var products = productsQuery.Skip((pageNumber - 1) * pageSize)
 										.Take(pageSize)
 										.ToList();
 
-			// Konvertera produktdata till ett format som inkluderar bild-URL:er
 			var formattedProducts = products.Select(p => new
 			{
 				p.Name,
@@ -59,7 +57,7 @@ namespace Webbshop.Controllers
 			return Ok(formattedProducts);
 		}
 
-		private string GetImage(string imagePath)
+		public string GetImage(string imagePath)
 		{
 			string webURL = "https://localhost:5000/Pictures/";
 			string imageURL = $"{webURL}{imagePath}";

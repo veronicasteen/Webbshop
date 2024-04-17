@@ -11,6 +11,7 @@ namespace Webbshop.Pages
 
         public List <Product> Products { get; set; }
 
+		public int PageNumber { get; set; }
 
         public IndexModel(AppDbContext database)
         {
@@ -19,7 +20,7 @@ namespace Webbshop.Pages
 
         public void OnGet(int pageNumber, string searchItem, string category)
         {
-
+			PageNumber= pageNumber;
 			var pageSize = 10;
 
             Products = database.Products.OrderBy(p => p.Price).ToList();

@@ -4,61 +4,79 @@
 @{
 	ViewData["Title"] = "Home page";
 } 
+
 <div class="header-container">
-	<h1>Welcome, @accessControl.LoggedInAccountName!</h1>
+    <h1>Welcome, @accessControl.LoggedInAccountName!</h1>
 
-	<nav>
-		<ul class="list-container">
-			<li><a asp-page="./Index">Products</a></li>
-			<li><a asp-page="./Cart">Cart</a></li>
-		</ul>
-	</nav>
+    <nav>
+        <ul class="list-container">
+            <li><a asp-page="./Index">Products</a></li>
+            <li><a asp-page="./Cart">Cart</a></li>
+        </ul>
+    </nav>
 
-	<form method="get">
-		<div class="search-container">
-			<label for="searchInput">Search for an product:</label>
-			<input id="searchInput" type="text" name="searchItem" placeholder="What are you looking for?">
-			<input type="hidden" name="pageNumber" value ="1" />
-			<label for="categorySelect">Pick a category:</label>
-			<select id="categorySelect" name="categorySelect">
-				<option>Any category</option>
-				<option>Electronics</option>
-				<option>Outdoors</option>
-				<option>Eco-friendly</option>
-				<option>Indoors</option>
-				<option>Health</option>
-				<option>Food and beverage</option>
-			</select>
+    <form method="get">
+        <div class="search-container">
+            <label for="searchInput">Search for a product:</label>
+            <input id="searchInput" type="text" name="searchItem" placeholder="What are you looking for?">
+            <input type="hidden" name="pageNumber" value="1" />
+            <label for="categorySelect">Pick a category:</label>
+            <select id="categorySelect" name="categorySelect">
+                <option>Any category</option>
+                <option>Electronics</option>
+                <option>Outdoors</option>
+                <option>Eco-friendly</option>
+                <option>Indoors</option>
+                <option>Health</option>
+                <option>Food and beverage</option>
+            </select>
 
-			<button id="submit" type="submit">Search</button>
-		</div>
-	</form>
+            <button id="submit" type="submit">Search</button>
+        </div>
+    </form>
 </div>
 
-@{
-	
-
-	@if (Model.Products.Any())
-	{
-		<div class="product-grid">
-			@foreach (var product in Model.Products)
-			{
-				<div class="product-container">
-					<img src="Pictures/@product.ImagePath" width="200px" height="200px" />
-					<div class="image-details">
-						<h2>@product.Name</h2>
-						<p>@product.Price$</p>
-						<a asp-page="./Details" asp-route-id="@product.Id">Show details</a>
-					</div>
-				</div>
-			}
-		</div>
-	}
-	else
-	{
-		<p>No products found.</p>
-	}
+@if (Model.Products.Any())
+{
+    <div class="product-grid">
+        @foreach (var product in Model.Products)
+        {
+            <div class="product-container">
+                <img src="Pictures/@product.ImagePath" width="200px" height="200px" />
+                <div class="image-details">
+                    <h2>@product.Name</h2>
+                    <p>@product.Price$</p>
+                    <a asp-page="./Details" asp-route-id="@product.Id">Show details</a>
+                </div>
+            </div>
+        }
+    </div>
 }
+else
+{
+    <p>No products found.</p>
+}
+
+@{
+    int pageSize = 10;
+    int totalProducts = Model.Products.Count; // Totalt antal produkter
+    int totalPages = (int)Math.Ceiling((double)totalProducts / pageSize); // Totalt antal sidor
+
+    // Bestäm om previous- och next-knappar ska visas
+    bool showPrevious = Model.PageNumber > 1;
+    bool showNext = Model.PageNumber < totalPages;
+}
+<!-- Previous och next knappar -->
+@if (showPrevious)
+{
+    <a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber - 1)" class="btn btn-primary">Previous</a>
+}
+
+@if (showNext)
+{
+    <a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber + 1)" class="btn btn-primary">Next</a>
+}
+
 
 
 

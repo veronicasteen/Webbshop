@@ -61,6 +61,7 @@ namespace Webbshop.Pages
 		public IActionResult OnPostOrder()
 		{
 			var cartItemsToRemove = GetCartItems();
+			CartItems = cartItemsToRemove; // Tilldela CartItems med värdet från GetCartItems()
 			TotalAmount = CalculateTotalAmount(CartItems);
 			RemoveCartItems(cartItemsToRemove);
 
