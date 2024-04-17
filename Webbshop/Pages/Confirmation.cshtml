@@ -3,15 +3,27 @@
 @{
 }
 
-@* Visa upp total amount och tack för ordern
- *@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+</head>
+<body>
+    <header>
+        <h1>Your order has been confirmed.</h1>
+        <h2>Thank you!</h2>
+    </header>
 
-<h1>Your order has been confirmed.</h1>
-<h2>Thank you!</h2>
+    <main>
+        <p>Total Amount: @Model.TotalAmount</p>
+    </main>
 
-<p>Total Amount: @Model.TotalAmount</p>
-
-
-<button>
-	 <a asp-page="./Index">Return to homepage</a>
-</button>
+    <footer>
+        <button>
+            <a asp-page="./Index">Return to homepage</a>
+        </button>
+    </footer>
+</body>
+</html>

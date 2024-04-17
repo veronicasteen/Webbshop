@@ -11,7 +11,9 @@ namespace Webbshop.Pages
 
         public List <Product> Products { get; set; }
 
-		public int PageNumber { get; set; }
+		public int PageNumber { get; set; } 
+
+		public int TotalPages { get; set; }
 
         public IndexModel(AppDbContext database)
         {
@@ -27,18 +29,25 @@ namespace Webbshop.Pages
 			
 			if (!string.IsNullOrEmpty(searchItem))
 			{
-				// Filtrera produkter baserat på söktermen
 				Products = Products.Where(p => p.Name.ToLower().Contains(searchItem)).ToList();
 			}
 
-			// Kontrollera om det finns en vald kategori
 			if (!string.IsNullOrEmpty(category) && category != "Any category")
 			{
-				// Filtrera produkter baserat på kategorin
 				Products = Products.Where(p => p.Category.ToLower() == category.ToLower()).ToList();
 			}
 
-			Products = Products.Skip((pageNumber -1 ) * pageSize)
+            int totalProducts = Products.Count; 
+            TotalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+            PageNumber = Math.Clamp(PageNumber, 1, TotalPages);
+
+            //Här sätts första sidan till 1 även om använderen inte gjort en sökning än
+            if (PageNumber < 1)
+            {
+                PageNumber = 1;
+            }
+
+            Products = Products.Skip((pageNumber -1 ) * pageSize)
 				.Take(pageSize).ToList();
 			
 		}

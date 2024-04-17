@@ -4,25 +4,38 @@
 @{
 }
 
-<nav>
-    <ul>
-        <li><a asp-page="./Index">Products</a></li>
-        <li><a asp-page="./Cart">Cart</a></li>
-    </ul>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a asp-page="./Index">Products</a></li>
+                <li><a asp-page="./Cart">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<h1>Product Details</h1>
+    <main>
+        <h1>Product Details</h1>
 
-    <section>
-    <img src="Pictures/@Model.Product.ImagePath" />
-        <h2>@Model.Product.Name</h2>
-        <p>Description: @Model.Product.Description</p>
-        <p>Price: @Model.Product.Price$</p>
+        <section>
+            <img src="Pictures/@Model.Product.ImagePath" alt="Product Image">
+            <h2>@Model.Product.Name</h2>
+            <p>Description: @Model.Product.Description</p>
+            <p>Price: @Model.Product.Price$</p>
 
-    <form method="post">
-        <input type="hidden" name="id" value="@Model.Product.Id">
-        <button type="submit">Add to Cart</button>
-    </form>
-
-</section>
+            <form method="post">
+                <input type="hidden" name="id" value="@Model.Product.Id">
+                <button type="submit">Add to Cart</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
 

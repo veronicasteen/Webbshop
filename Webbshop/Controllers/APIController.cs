@@ -18,9 +18,8 @@ namespace Webbshop.Controllers
         }
 
 		[HttpGet]
-		[Route("/products")]
-		public IActionResult GetProducts(int pageNumber, string searchItem, string category)
-		{
+        public IActionResult GetProducts([FromQuery] int pageNumber, [FromQuery] string searchItem, [FromQuery] string category)
+        {
 			var pageSize = 10;
 
 			// Hämta produkter från databasen
@@ -57,6 +56,7 @@ namespace Webbshop.Controllers
 			return Ok(formattedProducts);
 		}
 
+		[HttpGet("/Pictures/{imagePath}")]
 		public string GetImage(string imagePath)
 		{
 			string webURL = "https://localhost:5000/Pictures/";
