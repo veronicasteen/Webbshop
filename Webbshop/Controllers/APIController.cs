@@ -18,7 +18,8 @@ namespace Webbshop.Controllers
         }
 
 		[HttpGet]
-        public IActionResult GetProducts([FromQuery] int pageNumber, [FromQuery] string searchItem, [FromQuery] string category)
+		[Route("/products")]
+        public IActionResult GetProducts(int pageNumber, string searchItem, string category)
         {
 			var pageSize = 10;
 
@@ -37,8 +38,6 @@ namespace Webbshop.Controllers
 				productsQuery = productsQuery.Where(p => p.Category.ToLower() == category.ToLower());
 			}
 
-			// Sortera produkter baserat på pris, kanske kan ta bort detta
-			productsQuery = productsQuery.OrderBy(p => p.Price);
 
 			var products = productsQuery.Skip((pageNumber - 1) * pageSize)
 										.Take(pageSize)
@@ -56,7 +55,7 @@ namespace Webbshop.Controllers
 			return Ok(formattedProducts);
 		}
 
-		[HttpGet("/Pictures/{imagePath}")]
+		//[HttpGet("/Pictures/{imagePath}")]
 		public string GetImage(string imagePath)
 		{
 			string webURL = "https://localhost:5000/Pictures/";
