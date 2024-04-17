@@ -18,7 +18,6 @@ namespace Webbshop.Controllers
         }
 
 		[HttpGet]
-		[Route("/products")]
         public IActionResult GetProducts(int pageNumber, string searchItem, string category)
         {
 			var pageSize = 10;
@@ -43,10 +42,14 @@ namespace Webbshop.Controllers
 										.Take(pageSize)
 										.ToList();
 
+			var imageURL = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+			
+
+
 			var formattedProducts = products.Select(p => new
 			{
 				p.Name,
-				image = GetImage(p.ImagePath), // Funktion för att generera bild-URL
+				image = $"{imageURL}/Pictures/{p.ImagePath}",
 				p.Price,
 				p.Category,
 				p.Description
@@ -56,12 +59,12 @@ namespace Webbshop.Controllers
 		}
 
 		//[HttpGet("/Pictures/{imagePath}")]
-		public string GetImage(string imagePath)
-		{
-			string webURL = "https://localhost:5000/Pictures/";
-			string imageURL = $"{webURL}{imagePath}";
-			return imageURL;
-		}
+		//public string GenerateImage(string imagePath)
+		//{
+		//	string webURL = "https://localhost:5000/Pictures/";
+		//	string imageURL = $"{webURL}{imagePath}";
+		//	return imageURL;
+		//}
 	}
 
 }
