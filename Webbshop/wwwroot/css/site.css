@@ -6,19 +6,30 @@ body {
     background-color: #fefefe;
 }
 
-h1 {
-    font-weight: 400;
-    text-align: center;
-    align-content: center;
-    font-weight: 600;
-    font-family: "Rajdhani", sans-serif;
+.header-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Dela upp i tre kolumner */
+}
+
+.welcome-column {
+    font-weight: lighter;
+    text-align: left;
     font-style: normal;
+    font-size: 8px;
+    grid-column: 1 / 2;
+}
+
+.headline {
+    font-size:18px;
+    grid-column: 2 / 3; /* Andra kolumnen (mitten) */
+    text-align: center;
 }
 
 .list-container {
     display: flex;
     flex-direction: row;
     justify-content:center;
+    margin-right:35px;
 }
 
     .list-container a {
@@ -58,22 +69,23 @@ li {
         background-color: #fefefe;
     }
 
-    .search-container button {
-        padding: 4px;
+    .next-button, .previous-button, .search-container button {
         color: black;
+        padding: 4px;
+        font-size: 14px;
         padding-left: 6px;
         padding-right: 6px;
-        background-color: #fefefe;
+        text-decoration: none; /* Ta bort understreck */
         font-optical-sizing: auto;
-        font-size:14px;
+        background-color: #fefefe;
         font-family: "Rajdhani", sans-serif;
         border: 2px solid rgba(63, 57, 41, 0.577);
         transition: background-color 0.1s, transform 0.2s ease-in-out;
     }
 
-button:hover {
-    background-color: rgb(202, 197, 184);
-}
+        .next-button:hover, .previous-button:hover, .search-container button:hover {
+            background-color: rgb(202, 197, 184);
+        }
 
 .product-grid {
     padding: 30px;
@@ -86,17 +98,15 @@ button:hover {
 .product-container {
     text-align: center;
     border-radius: 16px;
-    background-color: #ded2b985;
+    background-color: #d4d4d492;
     box-shadow: 0px 0px 15px rgba(63, 57, 41, 0.577);
     width: 20rem;
-    /*height: 22rem;*/
     display: flex;
     flex-direction: column;
 }
 
 img {
     width: 320px;
-    /*height: 208px;*/
     object-fit: cover;
 }
 
@@ -114,3 +124,11 @@ img {
         padding-bottom: 5px;
         text-decoration: none;
     }
+
+.button-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+    margin-bottom: 20px;
+}

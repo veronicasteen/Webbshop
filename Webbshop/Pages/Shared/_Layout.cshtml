@@ -12,9 +12,11 @@
 </head>
 <body>
     <header>
-        <environment names="Development">
-            @await Component.InvokeAsync(nameof(FakeLoginMenu))
-        </environment>
+        <div class="welcome-column">
+            <environment names="Development">
+                @await Component.InvokeAsync(nameof(FakeLoginMenu))
+            </environment>
+        </div>
     </header>
     <main>
         @RenderBody()
