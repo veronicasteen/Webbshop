@@ -7,40 +7,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="description" content="A fictional webshop that allows users to search for products,
+	<meta name="description" content="A fictional webshop that allows users to search for products,
     add them to their shopping cart, and place orders.
     The webshop is built using Razor Pages, including an API.">
-    <meta name="keywords" content="Webshop, Products, Razor Pages, C#, Backend, HTML, CSS, API">
-    <meta name="author" content="Oskar Almhage, Veronica Steen">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Details</title>
+	<meta name="keywords" content="Webshop, Products, Razor Pages, C#, Backend, HTML, CSS, API">
+	<meta name="author" content="Oskar Almhage, Veronica Steen">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Product Details</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a asp-page="./Index">Products</a></li>
-                <li><a asp-page="./Cart">Cart</a></li>
-            </ul>
-        </nav>
-    </header>
+	<div class="header-container">
+		<div class="headline">
+			<h1>Webshop</h1>
+		</div>
+		<div class="empty-column"></div>
 
-    <main>
-        <h1>Product Details</h1>
+	</div>
+	<nav>
+		<ul class="list-container">
+			<li><a asp-page="./Index">Products</a></li>
+			<li><a asp-page="./Cart">Cart</a></li>
+		</ul>
+	</nav>
 
-        <section>
-            <img src="Pictures/@Model.Product.ImagePath" alt="Product Image">
-            <h2>@Model.Product.Name</h2>
-            <p>Description: @Model.Product.Description</p>
-            <p>Price: @Model.Product.Price$</p>
+	<main>
 
-            <form method="post">
-                <input type="hidden" name="id" value="@Model.Product.Id">
-                <button type="submit">Add to Cart</button>
-            </form>
-        </section>
-    </main>
+		<section>
+			<div class="product-headline">
+				<h1>Product Details</h1>
+			</div>
+			<div class="details-container">
+				<img src="Pictures/@Model.Product.ImagePath" alt="Product Image">
+				<h2>@Model.Product.Name</h2>
+				<p>Description: @Model.Product.Description</p>
+				<p>Price: @Model.Product.Price$</p>
+
+				<form method="post">
+					<input type="hidden" name="id" value="@Model.Product.Id">
+					<button type="submit">Add to Cart</button>
+				</form>
+			</div>
+		</section>
+	</main>
 </body>
 </html>
 

@@ -16,19 +16,23 @@
     <title>Order Confirmation</title>
 </head>
 <body>
-    <header>
-        <h1>Your order has been confirmed.</h1>
-        <h2>Thank you!</h2>
-    </header>
 
+    <header>
+        <div class="headline">
+            <h1>Webshop</h1>
+        </div>
+    </header>
     <main>
-        <p>Total Amount: @Model.TotalAmount</p>
+        <div class="order-container">
+            <h1>Thank you!</h1>
+            <h2>Your order has been confirmed</h2>
+            <p>Total Amount: @Model.TotalAmount$</p>
+
+            <button class="return-button">
+                <a asp-page="./Index">Return to homepage</a>
+            </button>
+        </div>
     </main>
 
-    <footer>
-        <button>
-            <a asp-page="./Index">Return to homepage</a>
-        </button>
-    </footer>
 </body>
 </html>

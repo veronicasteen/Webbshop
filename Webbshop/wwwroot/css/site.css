@@ -47,15 +47,21 @@ nav {
 
     .list-container li {
         font-size: 20px;
-        margin-right: 70px;
-        curser:pointer;
+        margin-right: 70px;   
     }
 
     .list-container a {
-        text-decoration: none;
+        cursor: pointer;
         color: black;
-        text-align: center;
+        padding: 2px;
+        font-size: 18px;
+        text-decoration: none; /* Ta bort understreck */
+        font-optical-sizing: auto;
+        background-color: #fefefe;
     }
+        .list-container a:hover {
+            color: rgba(63, 57, 41, 0.577);
+        }   
 
 .search-container {
     display: flex;
@@ -64,9 +70,7 @@ nav {
     margin-right: 10px;
 }
 
-    .search-container label{
-        
-    }
+    .search-container label,
     .search-container input,
     .search-container select,
     .search-container button {
@@ -82,7 +86,7 @@ nav {
         background-color: #fefefe;
     }
 
-    .next-button, .previous-button, .search-container button {
+    .next-button, .previous-button, .search-container button, .return-button {
         color: black;
         padding: 4px;
         font-size: 14px;
@@ -95,7 +99,7 @@ nav {
         transition: background-color 0.1s, transform 0.2s ease-in-out;
     }
 
-        .next-button:hover, .previous-button:hover, .search-container button:hover {
+        .next-button:hover, .previous-button:hover, .search-container button, .return-button:hover {
             background-color: rgb(202, 197, 184);
         }
 
@@ -118,8 +122,10 @@ nav {
 }
 
 img {
-    width: 320px;
+    width: 20rem;
+    height:20rem;
     object-fit: cover;
+    border: 2px solid #746a58;
 }
 
 .image-details {
@@ -145,51 +151,27 @@ img {
     margin-bottom: 20px;
 }
 
-.list-container {
-    gap: 40px;
+
+/*details page*/
+
+.product-headline {
+    text-align: center;
+}
+
+.details-container {
+    text-align: center;
+    border-radius: 16px;
+    background-color: #d4d4d492;
+    box-shadow: 0px 0px 15px rgba(63, 57, 41, 0.577);
+    margin: auto;
+    width: 20rem;
     display: flex;
-    flex-direction: row;
+    padding-bottom:8px;
+    flex-direction: column;
     justify-content: center;
+    align-items: center; /* Centrera horisontellt */
 }
-
-    .list-container a {
-        text-decoration: none;
-        color: black;
-        text-align:center;
-    }
-
-li {
-    font-size: 20px;
-    list-style: none;
-    display: inline;
-}
-
-.search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 10px;
-}
-
-    .search-container label{
-        
-    }
-    .search-container input,
-    .search-container select,
-    .search-container button {
-        margin: 5px;
-        margin-right: 10px;
-    }
-
-    .search-container input, .search-container select {
-        padding: 4px;
-        outline: none;
-        border: none;
-        border: 2px solid rgba(63, 57, 41, 0.577);
-        background-color: #fefefe;
-    }
-
-    .next-button, .previous-button, .search-container button {
+    .details-container button {
         color: black;
         padding: 4px;
         font-size: 14px;
@@ -201,53 +183,32 @@ li {
         border: 2px solid rgba(63, 57, 41, 0.577);
         transition: background-color 0.1s, transform 0.2s ease-in-out;
     }
-
-        .next-button:hover, .previous-button:hover, .search-container button:hover {
+        .details-container button:hover {
             background-color: rgb(202, 197, 184);
         }
 
-.product-grid {
-    padding: 30px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Fyra kolumner per rad */
-    gap: 30px; /* Mellanrum mellan bilderna */
-    justify-items: center; /* Centrerar bilder horisontellt */
-}
+/*Order page*/
 
-.product-container {
-    text-align: center;
-    border-radius: 16px;
-    background-color: #d4d4d492;
-    box-shadow: 0px 0px 15px rgba(63, 57, 41, 0.577);
-    width: 20rem;
+.order-container {
+    width: 50%;
+    margin: auto;
     display: flex;
     flex-direction: column;
-}
-
-img {
-    width: 320px;
-    object-fit: cover;
-}
-
-.image-details {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-    .image-details h2 {
-        flex: 1;
-    }
-
-    .image-details a {
-        padding-bottom: 5px;
-        text-decoration: none;
-    }
-
-.button-section {
-    display: flex;
     justify-content: center;
-    margin-top: 20px;
-    gap: 10px;
-    margin-bottom: 20px;
+    text-align: center;
+    background-color: #d4d4d492;
+    border-radius: 7px;
+    padding-bottom: 20px;
+    border: 10px solid #f4f4f445;
+}
+
+.return-button {
+    max-width: 30%; /* Maximalt utrymme som knappen kan ta upp */
+    margin: auto;
+
+}
+
+.return-button a{
+    color:black;
+    text-decoration: none;
 }
