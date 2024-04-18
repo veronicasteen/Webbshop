@@ -3,92 +3,95 @@
 @inject Webbshop.Data.AccessControl accessControl
 @{
 	ViewData["Title"] = "Home page";
-} 
+}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewData["Title"]</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;
+    0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
 
-        <div class="header-container">
-                <div class="welcome-column">
-                    <h1>Welcome, @accessControl.LoggedInAccountName!</h1>
-                </div>
-                <div class="headline">
-                    <h1>Webshop</h1>
-                </div>
-                <div class="empty-column"></div>
+	<div class="header-container">
+		<div class="welcome-column">
+			<h1>Welcome, @accessControl.LoggedInAccountName!</h1>
+		</div>
+		<div class="headline">
+			<h1>Webshop</h1>
+		</div>
+		<div class="empty-column"></div>
 
-        </div>
-            <nav>
-                <ul class="list-container">
-                    <li><a asp-page="./Index">Products</a></li>
-                    <li><a asp-page="./Cart">Cart</a></li>
-                </ul>
-            </nav>
+	</div>
+	<nav>
+		<ul class="list-container">
+			<li><a asp-page="./Index">Products</a></li>
+			<li><a asp-page="./Cart">Cart</a></li>
+		</ul>
+	</nav>
 
-            <form method="get">
-                <div class="search-container">
-                    <label for="searchInput">Search for a product:</label>
-                    <input id="searchInput" type="text" name="searchItem" placeholder="What are you looking for?">
-                    <input type="hidden" name="pageNumber" value="1" />
-                    <label for="categorySelect">Pick a category:</label>
-                    <select id="categorySelect" name="categorySelect">
-                        <option>Any category</option>
-                        <option>Electronics</option>
-                        <option>Outdoors</option>
-                        <option>Eco-friendly</option>
-                        <option>Indoors</option>
-                        <option>Health</option>
-                        <option>Food and beverage</option>
-                    </select>
+	<form method="get">
+		<div class="search-container">
+			<label for="searchInput">Search for a product:</label>
+			<input id="searchInput" type="text" name="searchItem" placeholder="What are you looking for?">
+			<input type="hidden" name="pageNumber" value="1" />
+			<label for="categorySelect">Pick a category:</label>
+			<select id="categorySelect" name="categorySelect">
+				<option>Any category</option>
+				<option>Electronics</option>
+				<option>Outdoors</option>
+				<option>Eco-friendly</option>
+				<option>Indoors</option>
+				<option>Health</option>
+				<option>Food and beverage</option>
+			</select>
 
-                    <button id="submit" type="submit">Search</button>
-                </div>
-            </form>
-    </header>
+			<button id="submit" type="submit">Search</button>
+		</div>
+	</form>
 
-    <main>
-        @if (Model.Products.Any())
-        {
-            <div class="product-grid">
-                @foreach (var product in Model.Products)
-                {
-                    <article class="product-container">
-                        <img src="Pictures/@product.ImagePath" width="200px" height="200px" alt="Product Image" />
-                        <div class="image-details">
-                            <h2>@product.Name</h2>
-                            <p>@product.Price$</p>
-                            <a asp-page="./Details" asp-route-id="@product.Id">Show details</a>
-                        </div>
-                    </article>
-                }
-            </div>
-        }
-        else
-        {
-            <p>No products found.</p>
-        }
-    </main>
+	<main>
+		@if (Model.Products.Any())
+		{
+			<div class="product-grid">
+				@foreach (var product in Model.Products)
+				{
+					<article class="product-container">
+						<img src="Pictures/@product.ImagePath" width="200px" height="200px" alt="Product Image" />
+						<div class="image-details">
+							<h2>@product.Name</h2>
+							<p>@product.Price$</p>
+							<a asp-page="./Details" asp-route-id="@product.Id">Show details</a>
+						</div>
+					</article>
+				}
+			</div>
+		}
+		else
+		{
+			<p>No products found.</p>
+		}
+	</main>
 
-    <footer>
-        <div class="button-section">
-            @if (Model.PageNumber > 1)
-            {
-                <a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber - 1)" class="previous-button">Previous</a>
-            }
+	<footer>
+		<div class="button-section">
+			@if (Model.PageNumber > 1)
+			{
+				<a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber - 1)" class="previous-button">Previous</a>
+			}
 
-            @if (Model.PageNumber < Model.TotalPages)
-            {
-                <a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber + 1)" class="next-button">Next</a>
-            }
-        </div>
-    </footer>
+			@if (Model.PageNumber < Model.TotalPages)
+			{
+				<a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber + 1)" class="next-button">Next</a>
+			}
+		</div>
+	</footer>
 </body>
 </html>
 
