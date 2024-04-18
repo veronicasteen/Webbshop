@@ -39,17 +39,18 @@
 			</div>
 			<div class="details-container">
 				<img src="Pictures/@Model.Product.ImagePath" alt="Product Image">
-				<h2>@Model.Product.Name</h2>
-				<p>Description: @Model.Product.Description</p>
-				<p>Price: @Model.Product.Price$</p>
+				<div class="text-container">
+					<h2>@Model.Product.Name</h2>
+					<p>@Model.Product.Description</p>
+					<p>Price: @Model.Product.Price$</p>
 
-				<form method="post">
-					<input type="hidden" name="id" value="@Model.Product.Id">
-					<button type="submit">Add to Cart</button>
-				</form>
+					<form method="post">
+						<input type="hidden" name="id" value="@Model.Product.Id">
+						<button type="submit">Add to Cart</button>
+					</form>
+				</div>
 			</div>
 		</section>
 	</main>
 </body>
 </html>
-

@@ -6,58 +6,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="description" content="A fictional webshop that allows users to search for products, 
-    add them to their shopping cart, and place orders. 
+	<meta name="description" content="A fictional webshop that allows users to search for products,
+    add them to their shopping cart, and place orders.
     The webshop is built using Razor Pages, including an API.">
-    <meta name="keywords" content="Webshop, Products, Razor Pages, C#, Backend, HTML, CSS, API">
-    <meta name="author" content="Oskar Almhage, Veronica Steen">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
+	<meta name="keywords" content="Webshop, Products, Razor Pages, C#, Backend, HTML, CSS, API">
+	<meta name="author" content="Oskar Almhage, Veronica Steen">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cart</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a asp-page="./Index">Products</a></li>
-                <li><a asp-page="./Cart">Cart</a></li>
-            </ul>
-        </nav>
-    </header>
+	<div class="header-container">
+		<div class="headline">
+			<h1>Webshop</h1>
+		</div>
+		<div class="empty-column"></div>
 
-    <main>
-        <h1>Cart:</h1>
+	</div>
+	<nav>
+		<ul class="list-container">
+			<li><a asp-page="./Index">Products</a></li>
+			<li><a asp-page="./Cart">Cart</a></li>
+		</ul>
+	</nav>
 
-        @if (Model.CartItems != null && Model.CartItems.Any())
-        {
-            @foreach (var item in Model.CartItems)
-            {
-                <section>
-                    <img src="Pictures/@item.Product.ImagePath" width="200px" height="200px" alt="Product Image">
+	<main>
+		<div class="product-headline">
+			<h1>Your cart</h1>
+		</div>
+		@if (Model.CartItems != null && Model.CartItems.Any())
+		{
+			<div class="cart-grid">
+				@foreach (var item in Model.CartItems)
+				{
+					<section>
+						<div class="cart-container">
+							<img src="Pictures/@item.Product.ImagePath" width="200px" height="200px" alt="Product Image">
 
-                    <ul>
-                        <li>@item.Product.Name</li>
-                        <li>@item.Product.Price$</li>
-                        <li>Quantity: @item.Quantity</li>
-                        <li>Total amount: @(item.Product.Price * item.Quantity)$</li>
-                    </ul>
-                </section>
-            }
-        }
-        else
-        {
-            <p>Your cart is empty.</p>
-        }
+							<ul>
+								<li id="product-name">@item.Product.Name</li>
+								<li>@item.Product.Price$</li>
+								<li>Quantity: @item.Quantity</li>
+								<li>Total amount: @(item.Product.Price * item.Quantity)$</li>
+							</ul>
+						</div>
+					</section>
+				}
+			</div>
+		}
+		else
+		{
+			<p>Your cart is empty.</p>
+		}
+		<div class="cart-footer">
+			<p>Total: @Model.TotalAmount$</p>
 
-        <p>Total: @Model.TotalAmount$</p>
+			<div class="cart-buttons">
+				<form asp-page-handler="delete" method="post">
+					<button type="submit" id="clear-button">Clear cart</button>
+				</form>
 
-        <form asp-page-handler="delete" method="post">
-            <button type="submit">Clear cart</button>
-        </form>
-
-        <form asp-page-handler="order" method="post">
-            <button type="submit">Order</button>
-        </form>
-    </main>
+				<form asp-page-handler="order" method="post">
+					<button type="submit" id="order-button">Order</button>
+				</form>
+			</div>
+		</div>
+	</main>
 </body>
 </html>
