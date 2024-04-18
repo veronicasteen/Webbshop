@@ -1,5 +1,5 @@
 html {
-
+    font-family: "Kanit", sans-serif;
 }
 
 body {
@@ -48,6 +48,7 @@ nav {
     .list-container li {
         font-size: 20px;
         margin-right: 70px;
+        curser:pointer;
     }
 
     .list-container a {
