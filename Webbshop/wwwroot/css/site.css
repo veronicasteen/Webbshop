@@ -24,15 +24,15 @@ body {
     font-family: "Kanit", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 60px;
+    font-size: 70px;
     grid-column: 2 / 3; 
     text-align: center;
     align-items: center;
-    color: white; 
+    color: black; 
     display: flex;
     justify-content: center;
-    text-shadow: -1px -1px 0 black, 3px -1px 0 black, -1px 3px 0 black, 3px 3px 0 black;
-}
+/*    text-shadow: -1px -1px 0 black, 3px -1px 0 black, -1px 3px 0 black, 3px 3px 0 black;
+*/}
 
 nav {
     display: flex;
