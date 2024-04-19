@@ -17,39 +17,30 @@
 	<title>Product Details</title>
 </head>
 <body>
-	
-			<h1 class="headline">Webshop</h1>
-		
-
-	
+	<h1 class="headline">Webshop</h1>
 	<nav>
 		<ul class="list-container">
 			<li><a asp-page="./Index">Products</a></li>
 			<li><a asp-page="./Cart">Cart</a></li>
 		</ul>
 	</nav>
-
 	<main>
-
 		<h2 class="product-headline">Product Details</h2>
-
-
 		<section class="details-container">
+			<img src="Pictures/@Model.Product.ImagePath" alt="Product Image">
+			<div class="text-container">
+				<h3>@Model.Product.Name</h3>
+				<p>@Model.Product.Description</p>
+				<p>Price: @Model.Product.Price$</p>
 
-			
-			
-				<img src="Pictures/@Model.Product.ImagePath" alt="Product Image">
-				<div class="text-container">
-					<h3>@Model.Product.Name</h3>
-					<p>@Model.Product.Description</p>
-					<p>Price: @Model.Product.Price$</p>
-
-					<form method="post">
-						<input type="hidden" name="id" value="@Model.Product.Id">
-						<button type="submit">Add to Cart</button>
-					</form>
-				</div>
-			
+				<form method="post">
+					<input type="hidden" name="id" value="@Model.Product.Id">
+					<button type="submit" class="add-button">Add to Cart</button>
+				</form>
+				<button class="return-button">
+					<a asp-page="./Index">Return to products</a>
+				</button>
+			</div>
 		</section>
 	</main>
 </body>

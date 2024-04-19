@@ -9,7 +9,7 @@ body {
 .header-container {
     grid-auto-rows: 120px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Dela upp i tre kolumner */
+    grid-template-columns: 1fr 1fr 1fr; 
 }
 
 .welcome-column {
@@ -24,11 +24,11 @@ body {
     font-family: "Kanit", sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 42px;
-    grid-column: 2 / 3; /* Andra kolumnen (mitten) */
+    font-size: 60px;
+    grid-column: 2 / 3; 
     text-align: center;
     align-items: center;
-    color: white; /* Gör texten vit */
+    color: white; 
     display: flex;
     justify-content: center;
     text-shadow: -1px -1px 0 black, 3px -1px 0 black, -1px 3px 0 black, 3px 3px 0 black;
@@ -55,7 +55,7 @@ nav {
         color: black;
         padding: 2px;
         font-size: 18px;
-        text-decoration: none; /* Ta bort understreck */
+        text-decoration: none; 
         font-optical-sizing: auto;
         background-color: #fefefe;
     }
@@ -86,29 +86,31 @@ nav {
         background-color: #fefefe;
     }
 
-    .next-button, .previous-button, .search-container button, .return-button {
+    .next-button, .previous-button, .search-container button, .return-button, .add-button{
         color: black;
         padding: 4px;
         font-size: 14px;
         padding-left: 6px;
         padding-right: 6px;
-        text-decoration: none; /* Ta bort understreck */
+        text-decoration: none; 
         font-optical-sizing: auto;
         background-color: #fefefe;
         border: 2px solid rgba(63, 57, 41, 0.577);
         transition: background-color 0.1s, transform 0.2s ease-in-out;
+        margin-bottom: 5px;
     }
 
-        .next-button:hover, .previous-button:hover, .search-container button, .return-button:hover {
+
+        .next-button:hover, .previous-button:hover, .search-container button:hover, .return-button:hover, .add-button:hover {
             background-color: rgb(202, 197, 184);
         }
 
 .product-grid {
     padding: 30px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Fyra kolumner per rad */
-    gap: 10px; /* Mellanrum mellan bilderna */
-    justify-items: center; /* Centrerar bilder horisontellt */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px; 
+    justify-items: center; 
 }
 
 .product-container {
@@ -155,8 +157,8 @@ nav {
 .cart-grid {
     padding: 30px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Fyra kolumner per rad */
-    gap: 30px; /* Mellanrum mellan bilderna */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px; 
     justify-items: center;
 }
 
@@ -185,9 +187,9 @@ nav {
     justify-content: center;
     text-align: center;
     align-items: center;
-    background-color: #ffffff; /* Bakgrundsfärg för att tydligt markera fotern */
-    padding: 10px; /* Justera paddingen efter behov */
-    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); /* Lägg till en skugga under fotern för att skilja den från innehållet */
+    background-color: #ffffff; 
+    padding: 10px; 
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1); 
 }
 
 .cart-buttons {
@@ -195,7 +197,7 @@ nav {
 }
 
     .cart-buttons form {
-        margin-right: 10px; /* Justera avståndet mellan knapparna */
+        margin-right: 10px; 
         margin-left: 10px;
         color: black;
         font-size: 14px;
@@ -213,8 +215,14 @@ nav {
         background-color: rgb(202, 197, 184);
     }
 
-.empty-cart-text{
-    text-align:center;
+.empty-cart-text {
+    text-align: center;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.return-button{
+    display: flex;
 }
 /*details page*/
 .product-headline {
@@ -247,7 +255,6 @@ nav {
     margin-top:60px;
 }
 
-
 /*Order page*/
 .order-container {
     width: 50%;
@@ -263,7 +270,7 @@ nav {
 }
 
 .return-button {
-    max-width: 30%; /* Maximalt utrymme som knappen kan ta upp */
+    max-width: 30%; 
     margin: auto;
 
 }

@@ -18,7 +18,7 @@
 <body>
 
 	<header class="header-container">
-		<h1 class ="headline">Webshop</h1>
+		<h1 class="headline">Webshop</h1>
 	</header>
 
 	<nav>
@@ -65,11 +65,13 @@
 
 		}
 		else
+
 		{
 			<p class="empty-cart-text">Your cart is empty.</p>
-			<button class="return-button">
-				<a asp-page="./Index">Return to homepage</a>
+			<button class="return-button" class="empty-cart-text">
+				<a asp-page="./Index">Return to products</a>
 			</button>
+			
 		}
 
 	</main>
