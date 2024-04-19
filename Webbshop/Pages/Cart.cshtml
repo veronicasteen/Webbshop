@@ -16,16 +16,17 @@
 	<title>Cart</title>
 </head>
 <body>
+
 	<header class="header-container">
 		<h1 class ="headline">Webshop</h1>
 	</header>
+
 	<nav>
 		<ul class="list-container">
 			<li><a asp-page="./Index">Products</a></li>
 			<li><a asp-page="./Cart">Cart</a></li>
 		</ul>
 	</nav>
-
 	<main>
 
 		<h2 class="product-headline">Your cart</h2>
@@ -62,11 +63,13 @@
 				</div>
 			</footer>
 
-
 		}
 		else
 		{
 			<p class="empty-cart-text">Your cart is empty.</p>
+			<button class="return-button">
+				<a asp-page="./Index">Return to homepage</a>
+			</button>
 		}
 
 	</main>
