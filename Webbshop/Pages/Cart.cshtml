@@ -16,13 +16,9 @@
 	<title>Cart</title>
 </head>
 <body>
-	<div class="header-container">
-		<div class="headline">
-			<h1>Webshop</h1>
-		</div>
-		<div class="empty-column"></div>
-
-	</div>
+	<header class="header-container">
+		<h1 class ="headline">Webshop</h1>
+	</header>
 	<nav>
 		<ul class="list-container">
 			<li><a asp-page="./Index">Products</a></li>
@@ -31,50 +27,48 @@
 	</nav>
 
 	<main>
-		<div class="product-headline">
-			<h1>Your cart</h1>
-		</div>
+
+		<h2 class="product-headline">Your cart</h2>
+
 		@if (Model.CartItems != null && Model.CartItems.Any())
 		{
 			<div class="cart-grid">
 				@foreach (var item in Model.CartItems)
 				{
-					<section>
-						<div class="cart-container">
-							<img src="Pictures/@item.Product.ImagePath" alt="Product Image">
+					<div class="cart-container">
+						<img src="Pictures/@item.Product.ImagePath" alt="Product Image">
 
-							<ul>
-								<li id="product-name">@item.Product.Name</li>
-								<li>@item.Product.Price$</li>
-								<li>Quantity: @item.Quantity</li>
-								<li>Total amount: @(item.Product.Price * item.Quantity)$</li>
-							</ul>
-						</div>
-					</section>
-				}
-				</div>
-
-				<div class="cart-footer">
-					<p>Total: @Model.TotalAmount$</p>
-
-					<div class="cart-buttons">
-						<form asp-page-handler="delete" method="post">
-							<button type="submit" id="clear-button">Clear cart</button>
-						</form>
-
-						<form asp-page-handler="order" method="post">
-							<button type="submit" id="order-button">Order</button>
-						</form>
+						<ul>
+							<li id="product-name">@item.Product.Name</li>
+							<li>@item.Product.Price$</li>
+							<li>Quantity: @item.Quantity</li>
+							<li>Total amount: @(item.Product.Price * item.Quantity)$</li>
+						</ul>
 					</div>
-				</div>
+				}
+			</div>
 
-			
+			<footer class="cart-footer">
+				<p>Total: @Model.TotalAmount$</p>
+
+				<div class="cart-buttons">
+					<form asp-page-handler="delete" method="post">
+						<button type="submit" id="clear-button">Clear cart</button>
+					</form>
+
+					<form asp-page-handler="order" method="post">
+						<button type="submit" id="order-button">Order</button>
+					</form>
+				</div>
+			</footer>
+
+
 		}
 		else
 		{
-			<p class ="empty-cart-text">Your cart is empty.</p>
+			<p class="empty-cart-text">Your cart is empty.</p>
 		}
-		
+
 	</main>
 </body>
 </html>

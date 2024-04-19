@@ -17,13 +17,11 @@
 	<title>Product Details</title>
 </head>
 <body>
-	<div class="header-container">
-		<div class="headline">
-			<h1>Webshop</h1>
-		</div>
-		<div class="empty-column"></div>
+	
+			<h1 class="headline">Webshop</h1>
+		
 
-	</div>
+	
 	<nav>
 		<ul class="list-container">
 			<li><a asp-page="./Index">Products</a></li>
@@ -33,14 +31,16 @@
 
 	<main>
 
-		<section>
-			<div class="product-headline">
-				<h1>Product Details</h1>
-			</div>
-			<div class="details-container">
+		<h2 class="product-headline">Product Details</h2>
+
+
+		<section class="details-container">
+
+			
+			
 				<img src="Pictures/@Model.Product.ImagePath" alt="Product Image">
 				<div class="text-container">
-					<h2>@Model.Product.Name</h2>
+					<h3>@Model.Product.Name</h3>
 					<p>@Model.Product.Description</p>
 					<p>Price: @Model.Product.Price$</p>
 
@@ -49,7 +49,7 @@
 						<button type="submit">Add to Cart</button>
 					</form>
 				</div>
-			</div>
+			
 		</section>
 	</main>
 </body>

@@ -11,7 +11,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>@ViewData["Title"]</title>
-
+	<meta name="keywords" content="Webshop, Products, Razor Pages, C#, Backend, HTML, CSS, API">
+	<meta name="author" content="Oskar Almhage, Veronica Steen">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;
@@ -19,16 +22,15 @@
 </head>
 <body>
 
-	<div class="header-container">
+	<header class="header-container">
 		<div class="welcome-column">
 			<h1>Welcome, @accessControl.LoggedInAccountName!</h1>
 		</div>
-		<div class="headline">
-			<h1>Webshop</h1>
-		</div>
-		<div class="empty-column"></div>
+		
+			<h1 class="headline">Webshop</h1>
+		
 
-	</div>
+	</header>
 	<nav>
 		<ul class="list-container">
 			<li><a asp-page="./Index">Products</a></li>
@@ -56,10 +58,9 @@
 		</div>
 	</form>
 
-	<main>
+	<main class="product-grid">
 		@if (Model.Products.Any())
 		{
-			<div class="product-grid">
 				@foreach (var product in Model.Products)
 				{
 					<article class="product-container">
@@ -71,7 +72,6 @@
 						</div>
 					</article>
 				}
-			</div>
 		}
 		else
 		{
@@ -79,8 +79,8 @@
 		}
 	</main>
 
-	<footer>
-		<div class="button-section">
+	<footer class=" button-section">
+		
 			@if (Model.PageNumber > 1)
 			{
 				<a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber - 1)" class="previous-button">Previous</a>
@@ -90,7 +90,7 @@
 			{
 				<a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber + 1)" class="next-button">Next</a>
 			}
-		</div>
+		
 	</footer>
 </body>
 </html>
