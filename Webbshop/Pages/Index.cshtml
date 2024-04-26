@@ -43,7 +43,7 @@
 			<input id="searchInput" type="text" name="searchItem" placeholder="What are you looking for?">
 			<input type="hidden" name="pageNumber" value="1" />
 			<label for="categorySelect">Pick a category:</label>
-			<select id="categorySelect" name="categorySelect">
+			<select id="categorySelect" name="category">
 				<option>Any category</option>
 				<option>Electronics</option>
 				<option>Outdoors</option>
@@ -78,16 +78,17 @@
 	</main>
 
 	<footer class=" button-section">
-		
-			@if (Model.PageNumber > 1)
-			{
-				<a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber - 1)" class="previous-button">Previous</a>
-			}
 
-			@if (Model.PageNumber < Model.TotalPages)
-			{
-				<a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber + 1)" class="next-button">Next</a>
-			}
+		@if (Model.PageNumber > 1)
+		{
+			<a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber - 1)" asp-route-category="@Model.Category" class="previous-button">Previous</a>
+		}
+
+		@if (Model.PageNumber < Model.TotalPages)
+		{
+			<a asp-page="./Index" asp-route-pageNumber="@(Model.PageNumber + 1)" asp-route-category="@Model.Category" class="next-button">Next</a>
+		}
+
 		
 	</footer>
 </body>
