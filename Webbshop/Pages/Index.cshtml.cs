@@ -41,7 +41,7 @@ namespace Webbshop.Pages
 
 			int totalProducts = Products.Count;
 			TotalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
-			PageNumber = Math.Clamp(PageNumber, 1, TotalPages);
+			//PageNumber = Math.Clamp(PageNumber, 1, TotalPages);
 
 			if (PageNumber < 1)
 			{

@@ -27,7 +27,7 @@ namespace Webbshop.Pages
         }
         public IActionResult OnPost(int id)
         {
-            // Hämta den inloggade användarens ID från AccessControl
+            
             var loggedInUserId = accessControl.LoggedInAccountID;
 
             var existingProduct = database.AccountProducts.SingleOrDefault(ap => ap.AccountID == loggedInUserId && ap.ProductID == id);
@@ -48,11 +48,9 @@ namespace Webbshop.Pages
 
                 database.AccountProducts.Add(accountProduct);
             }
-            // Skapa en ny rad i AccountProduct-tabellen
            
             database.SaveChanges();
 
-            // Omdirigera till varukorgssidan eller annan sida
             return RedirectToPage("/Index");
         }
     }
